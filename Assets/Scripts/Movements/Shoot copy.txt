@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using System;
+public class Manager : MonoBehaviour
+{
+    public GameObject playerPrefab;
+    public Transform[] spawnPoints; // Array of spawn points
+
+    void Start()
+    {
+        SpawnPlayer();
+    }
+
+    void SpawnPlayer()
+    {
+        // Sort the spawn points by the number of players nearby (ascending order)
+        //Array.Sort(spawnPoints, (a, b) => CountPlayersNear(a.position).CompareTo(CountPlayersNear(b.position)));
+
+        // Instantiate the player at the least crowded spawn point
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[0].position, spawnPoints[0].rotation);
+    }
+
+    int CountPlayersNear(Vector3 position)
+    {
+        // Count the number of players within a certain radius of the position
+        return Physics.OverlapSphere(position, 5f, LayerMask.GetMask("Player")).Length;
+    }
+}
+
+
+
+
+ PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, playerPrefab.transform.rotation);

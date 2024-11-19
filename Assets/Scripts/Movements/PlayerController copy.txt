@@ -1,0 +1,9 @@
+I had a validation check that goes like this:
+
+Debug.LogError("Login failed: " + playerData.message);
+
+And the log in the console goes like this:
+
+{"status":"error","message":"Username does not exist"}
+
+Now I want to convert this validation check into the message box that you just made. Can you help me?

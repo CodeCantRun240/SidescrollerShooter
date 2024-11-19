@@ -1,0 +1,36 @@
+public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+           
+            stream.SendNext(transform.position);
+            //stream.SendNext(facingRight);
+            //stream.SendNext(weapon.transform.rotation);
+            //stream.SendNext(weapon.transform.position);
+            stream.SendNext(backArm.rotation);
+            stream.SendNext(backArm.position);
+            stream.SendNext(rightRotatingCenter.transform.position);
+
+            stream.SendNext(centerPos);
+            stream.SendNext(backArmRot);
+            stream.SendNext(backArmPos);
+            stream.SendNext(weaponRot); 
+            stream.SendNext(weaponPos);
+        }
+        else if (stream.IsReading)
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+            //facingRight = (bool)stream.ReceiveNext();
+            //weapon.transform.rotation = (Quaternion)stream.ReceiveNext();
+            //weapon.transform.position = (Vector3)stream.ReceiveNext();
+            backArm.rotation = (Quaternion)stream.ReceiveNext();
+            backArm.position = (Vector3)stream.ReceiveNext();
+            rightRotatingCenter.transform.position = (Vector3)stream.ReceiveNext();
+
+            centerPos = (Vector3)stream.ReceiveNext();
+            weaponPos = (Vector3)stream.ReceiveNext();
+            weaponRot = (Quaternion)stream.ReceiveNext();
+            backArmPos = (Vector3)stream.ReceiveNext();
+            backArmRot = (Quaternion)stream.ReceiveNext();
+        }
+    }
